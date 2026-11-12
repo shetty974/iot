@@ -1,0 +1,17 @@
+#define LDR_PIN 2 // Digital output from LDR module
+#define LED_PIN 13 // LED as streetlight
+void setup() {
+pinMode(LDR_PIN, INPUT);
+pinMode(LED_PIN, OUTPUT);
+}
+void loop() {
+int ldrState = digitalRead(LDR_PIN);
+if (ldrState == LOW) {
+// It's dark
+digitalWrite(LED_PIN, LOW); // Turn ON street light
+} else {
+// It's bright
+digitalWrite(LED_PIN, HIGH); // Turn OFF street light
+}
+delay(100); // Small delay for stability
+}
