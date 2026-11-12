@@ -1,0 +1,16 @@
+const int ledPin = 2;
+const int relayPin = 3;
+void setup() {
+pinMode(ledPin, OUTPUT);
+pinMode(relayPin, OUTPUT);
+}
+void loop() {
+// Turn ON LED and Relay
+digitalWrite(ledPin, HIGH);
+digitalWrite(relayPin, LOW);
+delay(1000);
+// Turn OFF LED and Relay
+digitalWrite(ledPin, LOW);
+digitalWrite(relayPin, HIGH);
+delay(1000); // OFF for 1 second
+}
