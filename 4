@@ -1,0 +1,35 @@
+// Motor control pins
+const int IN1 = 8;
+const int IN2 = 9;
+const int ENA = 10; // Must be PWM-capable
+void setup() {
+pinMode(IN1, OUTPUT);
+pinMode(IN2, OUTPUT);
+pinMode(ENA, OUTPUT);
+}
+void loop() {
+// Spin motor forward
+digitalWrite(IN1, HIGH);
+digitalWrite(IN2, LOW);
+// Increase speed gradually
+for (int speed = 0; speed <= 255; speed += 5) {
+analogWrite(ENA, speed);
+delay(20);
+}
+delay(1000); // Run at full speed for a while
+// Decrease speed
+for (int speed = 255; speed >= 0; speed -= 5) {
+analogWrite(ENA, speed);
+delay(20);
+}
+delay(1000); // Pause
+// Spin motor in reverse
+digitalWrite(IN1, LOW);
+digitalWrite(IN2, HIGH);
+// Full speed reverse
+analogWrite(ENA, 200);
+delay(2000);
+// Stop motor
+analogWrite(ENA, 0);
+delay(2000);
+}
