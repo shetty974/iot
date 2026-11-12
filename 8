@@ -1,0 +1,21 @@
+const int gasSensorPin = A0;
+const int alarmPin = 8;
+int gasLevel = 0;
+const int gasThreshold = 400;
+void setup() {
+Serial.begin(9600);
+pinMode(alarmPin, OUTPUT);
+}
+void loop() {
+gasLevel = analogRead(gasSensorPin);
+Serial.print("Gas Level: ");
+Serial.println(gasLevel);
+if (gasLevel > gasThreshold) {
+digitalWrite(alarmPin, HIGH); // Turn ON alarm
+Serial.println("Gas Leak Detected!");
+} else {
+digitalWrite(alarmPin, LOW); // Turn OFF alarm
+Serial.println("Safe Environment.");
+}
+delay(1000);
+}
