@@ -1,0 +1,42 @@
+const int trigPin = 9;
+const int echoPin = 10;
+const int soundPin = 8;
+const int buzzer = 7;
+long duration;
+int distance;
+void setup() {
+pinMode(trigPin, OUTPUT);
+pinMode(echoPin, INPUT);
+pinMode(soundPin, INPUT);
+pinMode(buzzer, OUTPUT);
+Serial.begin(9600);
+}
+void loop() {
+// Ultrasonic sensor
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+duration = pulseIn(echoPin, HIGH);
+// Calculate distance in cm
+distance = duration * 0.034 / 2;
+// Sound sensor
+int soundState = digitalRead(soundPin);
+Serial.print("Distance: ");
+Serial.print(distance);
+Serial.print(" cm");
+if (soundState == LOW) {
+Serial.println(" | Loud sound detected");
+} else {
+Serial.println(" | No loud sound");
+}
+// Intrusion detection
+if (distance < 20 || soundState == LOW) {
+digitalWrite(buzzer, HIGH);
+}
+else {
+digitalWrite(buzzer, LOW);
+}
+delay(500);
+}
